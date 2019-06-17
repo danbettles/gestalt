@@ -1,0 +1,26 @@
+{
+    "name": "threestreams/gestalt",
+    "type": "library",
+    "license": "ISC",
+    "authors": [
+        {
+            "name": "Daniel Bettles",
+            "email": "danbettles@yahoo.co.uk"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^8.2",
+        "squizlabs/PHP_CodeSniffer": "^2.9.1",
+        "danbettles/codesniffer-standard": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {"ThreeStreams\\Gestalt\\": "src/ThreeStreams/Gestalt/"}
+    },
+    "scripts": {
+        "dev:check-quality": [
+            "phpunit --bootstrap vendor/autoload.php --colors=always tests",
+            "phpcs --standard=phpcs.xml --extensions=php -p --colors src tests"
+        ]
+    }
+}
