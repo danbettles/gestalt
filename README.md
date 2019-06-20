@@ -57,3 +57,46 @@ assert($result === [
     'baz' => 'qux',
 ]);
 ```
+
+### each(\Closure $callback)
+
+Executes the callback for each of the elements.  The callback is passed the key and the value of the current element, in that order.
+
+```php
+use ThreeStreams\Gestalt\ArrayObject;
+
+$elements = [
+    'foo' => 'bar',
+    'baz' => 'qux',
+    'quux' => 'quuz',
+];
+
+$output = [];
+
+$arrayObject = (new ArrayObject($elements))->each(function ($key, $value) use (&$output) {
+    $output[$key] = $value;
+});
+
+assert($elements === $output);
+```
+
+`each()` will stop iterating if the callback returns exactly `false`.
+
+```php
+use ThreeStreams\Gestalt\ArrayObject;
+
+$output = [];
+
+(new ArrayObject([
+    'foo' => 'bar',
+    'baz' => 'qux',
+    'quux' => 'quuz',
+]))->each(function ($key, $value) use (&$output) {
+    $output[$key] = $value;
+    return false;
+});
+
+assert([
+    'foo' => 'bar',
+], $output);
+```

@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace ThreeStreams\Gestalt;
 
+use Closure;
+
 class ArrayObject
 {
     /** @var array */
@@ -38,5 +40,17 @@ class ArrayObject
         $sorted = array_replace($base, $elements);
 
         return $this->setElements($sorted);
+    }
+
+    /**
+     * Executes the callback for each of the elements.  Stops iterating if the callback returns `false`.
+     */
+    public function each(Closure $callback): void
+    {
+        foreach ($this->getElements() as $key => $value) {
+            if (false === $callback($key, $value)) {
+                return;
+            }
+        }
     }
 }

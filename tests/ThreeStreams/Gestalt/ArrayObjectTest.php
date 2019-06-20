@@ -141,4 +141,39 @@ class ArrayObjectTest extends TestCase
 
         $this->assertSame($expectedElements, $actual);
     }
+
+    public function testEachExecutesTheCallbackForEachOfTheElements()
+    {
+        $elements = [
+            'foo' => 'bar',
+            'baz' => 'qux',
+            'quux' => 'quuz',
+        ];
+
+        $output = [];
+
+        (new ArrayObject($elements))->each(function ($key, $value) use (&$output) {
+            $output[$key] = $value;
+        });
+
+        $this->assertSame($elements, $output);
+    }
+
+    public function testEachStopsIteratingIfTheCallbackReturnsFalse()
+    {
+        $output = [];
+
+        (new ArrayObject([
+            'foo' => 'bar',
+            'baz' => 'qux',
+            'quux' => 'quuz',
+        ]))->each(function ($key, $value) use (&$output) {
+            $output[$key] = $value;
+            return false;
+        });
+
+        $this->assertSame([
+            'foo' => 'bar',
+        ], $output);
+    }
 }
