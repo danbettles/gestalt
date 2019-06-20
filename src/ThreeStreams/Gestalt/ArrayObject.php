@@ -5,6 +5,9 @@ namespace ThreeStreams\Gestalt;
 
 use Closure;
 
+/**
+ * A simple array class.  Instances are mutable (i.e. methods change the state of the object).
+ */
 class ArrayObject
 {
     /** @var array */
@@ -26,6 +29,11 @@ class ArrayObject
         return $this->elements;
     }
 
+    /**
+     * When no arguments are passed, behaves the same as [\ksort()](https://www.php.net/manual/en/function.ksort.php).
+     * Otherwise, the elements can be put in the order specified in `$order`; this applies to arrays with numeric or
+     * non-numeric keys.
+     */
     public function sortByKey(array $order = []): self
     {
         if (empty($order)) {
@@ -43,7 +51,8 @@ class ArrayObject
     }
 
     /**
-     * Executes the callback for each of the elements.  Stops iterating if the callback returns `false`.
+     * Executes the callback for each of the elements.  The callback is passed the key and the value of the current
+     * element, in that order.  `each()` will stop iterating if the callback returns exactly `false`.
      */
     public function each(Closure $callback): void
     {
