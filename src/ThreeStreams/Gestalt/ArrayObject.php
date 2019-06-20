@@ -30,14 +30,14 @@ class ArrayObject
     {
         if (empty($order)) {
             $sorted = $this->getElements();
-            ksort($sorted);
+            \ksort($sorted);
 
             return $this->setElements($sorted);
         }
 
         $elements = $this->getElements();
-        $base = array_intersect_key(array_flip($order), $elements);
-        $sorted = array_replace($base, $elements);
+        $base = \array_intersect_key(\array_flip($order), $elements);
+        $sorted = \array_replace($base, $elements);
 
         return $this->setElements($sorted);
     }
