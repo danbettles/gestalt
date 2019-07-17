@@ -13,9 +13,32 @@ class ArrayObject
     /** @var array */
     private $elements;
 
-    public function __construct(array $elements)
+    public function __construct(array $elements = [])
     {
         $this->setElements($elements);
+    }
+
+    /**
+     * Appends an element with the specified value.
+     *
+     * @param mixed $value
+     */
+    public function append($value): self
+    {
+        $this->elements[] = $value;
+        return $this;
+    }
+
+    /**
+     * Adds or updates an element.
+     *
+     * @param mixed $key
+     * @param mixed $value
+     */
+    public function set($key, $value): self
+    {
+        $this->elements[$key] = $value;
+        return $this;
     }
 
     private function setElements(array $elements): self

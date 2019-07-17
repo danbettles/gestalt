@@ -17,6 +17,9 @@
     "autoload": {
         "psr-4": {"ThreeStreams\\Gestalt\\": "src/ThreeStreams/Gestalt/"}
     },
+    "autoload-dev": {
+        "psr-4": {"ThreeStreams\\Gestalt\\Tests\\": "tests/ThreeStreams/Gestalt/"}
+    },
     "scripts": {
         "dev:check-quality": [
             "phpunit --bootstrap vendor/autoload.php --colors=always tests",

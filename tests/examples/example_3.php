@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace ThreeStreams\Gestalt\Tests;
 
 use ThreeStreams\Gestalt\ArrayObject;
 
@@ -18,4 +18,4 @@ $arrayObject = (new ArrayObject($elements))->each(function ($key, $value) use (&
     $output[$key] = $value;
 });
 
-assert($elements === $output);
+assert($output === $elements);

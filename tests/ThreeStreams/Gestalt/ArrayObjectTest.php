@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests\ThreeStreams\Gestalt;
+namespace ThreeStreams\Gestalt\Tests;
 
 use PHPUnit\Framework\TestCase;
 use ThreeStreams\Gestalt\ArrayObject;
@@ -10,10 +10,14 @@ class ArrayObjectTest extends TestCase
 {
     public function testIsInstantiable()
     {
+        $emptyArrayObject = new ArrayObject();
+
+        $this->assertSame([], $emptyArrayObject->getElements());
+
         $elements = ['foo' => 'bar', 'baz' => 'qux'];
         $arrayObject = new ArrayObject($elements);
 
-        $this->assertEquals($elements, $arrayObject->getElements());
+        $this->assertSame($elements, $arrayObject->getElements());
     }
 
     public function providesArraysSortedByKey()
@@ -175,5 +179,31 @@ class ArrayObjectTest extends TestCase
         $this->assertSame([
             'foo' => 'bar',
         ], $output);
+    }
+
+    public function testAppendAddsAnElementAtTheEndOfTheArray()
+    {
+        $arrayObject = (new ArrayObject())
+            ->append('foo')
+            ->append('bar')
+            ->append('baz')
+        ;
+
+        $this->assertSame(['foo', 'bar', 'baz'], $arrayObject->getElements());
+    }
+
+    public function testSetAddsOrUpdatesAnElement()
+    {
+        $arrayObject = (new ArrayObject())
+            ->set('foo', 'bar')
+            ->set('baz', 'qux')
+            ->set('quux', 'quuz')
+        ;
+
+        $this->assertSame([
+            'foo' => 'bar',
+            'baz' => 'qux',
+            'quux' => 'quuz',
+        ], $arrayObject->getElements());
     }
 }
