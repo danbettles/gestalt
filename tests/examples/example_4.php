@@ -4,7 +4,7 @@ namespace Tests;
 
 use ThreeStreams\Gestalt\ArrayObject;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
 
 $output = [];
 
@@ -17,6 +17,6 @@ $output = [];
     return false;
 });
 
-assert([
+assert($output === [
     'foo' => 'bar',
-], $output);
+]);

@@ -96,7 +96,7 @@ $output = [];
     return false;
 });
 
-assert([
+assert($output === [
     'foo' => 'bar',
-], $output);
+]);
 ```

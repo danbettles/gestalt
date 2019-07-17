@@ -4,7 +4,7 @@ namespace Tests;
 
 use ThreeStreams\Gestalt\ArrayObject;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
 
 $elements = [
     'foo' => 'bar',
