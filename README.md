@@ -1,5 +1,7 @@
 # Gestalt
 
+[![Build Status](https://travis-ci.com/threestreams/gestalt.svg?branch=master)](https://travis-ci.com/threestreams/gestalt)
+
 Provides classes that implement basic patterns involving collections.  Key components are a class implementing a simplified filter-chain pattern, `SimpleFilterChain`, and a simple array class, `ArrayObject`.
 
 ## SimpleFilterChain
