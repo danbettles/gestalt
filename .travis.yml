@@ -16,4 +16,4 @@ cache:
 install:
   travis_retry composer install --no-interaction --prefer-source
 
-script: composer dev:check-quality
+script: composer check-quality

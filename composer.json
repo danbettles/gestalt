@@ -1,5 +1,6 @@
 {
     "name": "threestreams/gestalt",
+    "description": "Provides classes that implement basic patterns involving collections.  Key components are a class implementing a simplified filter-chain pattern, `SimpleFilterChain`, and a simple array class, `ArrayObject`.",
     "type": "library",
     "license": "ISC",
     "authors": [
@@ -8,10 +9,12 @@
             "email": "danbettles@yahoo.co.uk"
         }
     ],
-    "require": {},
+    "require": {
+        "php": "^7.2"
+    },
     "require-dev": {
         "phpunit/phpunit": "^8.2",
-        "squizlabs/PHP_CodeSniffer": "^2.9.1",
+        "squizlabs/php_codesniffer": "^2.9.1",
         "danbettles/codesniffer-standard": "dev-master"
     },
     "autoload": {
@@ -21,7 +24,7 @@
         "psr-4": {"ThreeStreams\\Gestalt\\Tests\\": "tests/ThreeStreams/Gestalt/"}
     },
     "scripts": {
-        "dev:check-quality": [
+        "check-quality": [
             "phpunit --bootstrap vendor/autoload.php --colors=always tests",
             "phpcs --standard=phpcs.xml --extensions=php -p --colors src tests"
         ]
