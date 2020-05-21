@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace ThreeStreams\Gestalt\Tests;
@@ -88,7 +89,7 @@ class SimpleFilterChainTest extends TestCase
         ], [
             [],
         ], [
-            new stdClass,
+            new stdClass(),
         ]];
     }
 
@@ -98,7 +99,7 @@ class SimpleFilterChainTest extends TestCase
     public function testConstructorThrowsAnExceptionIfAFilterIsNotACallable($invalidFilter)
     {
         $this->expectException(TypeError::class);
-        $this->expectExceptionMessageRegExp('~ must be callable,~');
+        $this->expectExceptionMessageMatches('~ must be callable,~');
 
         new SimpleFilterChain([$invalidFilter]);
     }
@@ -149,7 +150,7 @@ class SimpleFilterChainTest extends TestCase
     public function testAppendfilterThrowsAnExceptionIfTheFilterIsNotACallable($invalidFilter)
     {
         $this->expectException(TypeError::class);
-        $this->expectExceptionMessageRegExp('~ must be callable,~');
+        $this->expectExceptionMessageMatches('~ must be callable,~');
 
         (new SimpleFilterChain())->appendFilter($invalidFilter);
     }

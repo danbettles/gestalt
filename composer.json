@@ -10,12 +10,12 @@
         }
     ],
     "require": {
-        "php": "^7.2"
+        "php": "^7.4"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.2",
-        "squizlabs/php_codesniffer": "^2.9.1",
-        "danbettles/codesniffer-standard": "dev-master"
+        "squizlabs/php_codesniffer": "^3.5.5",
+        "danbettles/codesniffer-standard": "^v2.0.0"
     },
     "autoload": {
         "psr-4": {"ThreeStreams\\Gestalt\\": "src/ThreeStreams/Gestalt/"}
@@ -24,9 +24,14 @@
         "psr-4": {"ThreeStreams\\Gestalt\\Tests\\": "tests/ThreeStreams/Gestalt/"}
     },
     "scripts": {
-        "check-quality": [
+        "app:check-quality": [
             "phpunit --bootstrap vendor/autoload.php --colors=always tests",
-            "phpcs --standard=phpcs.xml --extensions=php -p --colors src tests"
+            "phpcs --standard=phpcs.xml -p --colors"
         ]
+    },
+    "config": {
+        "platform": {
+            "php": "7.4"
+        }
     }
 }
