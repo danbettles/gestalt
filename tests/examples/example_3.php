@@ -18,4 +18,4 @@ $arrayObject = (new ArrayObject($elements))->each(function ($key, $value) use (&
     $output[$key] = $value;
 });
 
-assert($output === $elements);
+\assert($output === $elements);

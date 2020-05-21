@@ -34,8 +34,8 @@ $request = [];
 
 $returnValue = $chain->execute($request);
 
-assert($request === [1, 2]);
-assert($returnValue === false);
+\assert($request === [1, 2]);
+\assert($returnValue === false);
 ```
 
 ## ArrayObject
@@ -49,16 +49,17 @@ When no arguments are passed, behaves the same as [ksort()](https://www.php.net/
 ```php
 use ThreeStreams\Gestalt\ArrayObject;
 
-$elements = [
+$result = (new ArrayObject([
     'foo' => 'bar',
     'baz' => 'qux',
     'quux' => 'quuz',
     'corge' => 'grault',
-];
+]))
+    ->sortByKey()
+    ->getElements()
+;
 
-$result = (new ArrayObject($elements))->sortByKey();
-
-assert($result === [
+\assert($result === [
     'baz' => 'qux',
     'corge' => 'grault',
     'foo' => 'bar',
@@ -84,9 +85,12 @@ $order = [
     'quux',
 ];
 
-$result = (new ArrayObject($elements))->sortByKey($order);
+$result = (new ArrayObject($elements))
+    ->sortByKey($order)
+    ->getElements()
+;
 
-assert($result === [
+\assert($result === [
     'corge' => 'grault',
     'foo' => 'bar',
     'quux' => 'quuz',
@@ -113,7 +117,7 @@ $arrayObject = (new ArrayObject($elements))->each(function ($key, $value) use (&
     $output[$key] = $value;
 });
 
-assert($output === $elements);
+\assert($output === $elements);
 ```
 
 `each()` will stop iterating if the callback returns exactly `false`.
@@ -132,7 +136,46 @@ $output = [];
     return false;
 });
 
-assert($output === [
+\assert($output === [
     'foo' => 'bar',
 ]);
+```
+
+### ->reindexByColumn(string $columnKey)
+
+Useful when working with collections of records (arrays/objects) of the same type.  Could be used to reindex an array of records selected from a database, by the values from a particular column, for example.
+
+```php
+use ThreeStreams\Gestalt\ArrayObject;
+
+$output = (new ArrayObject([
+    [
+        'id' => 876,
+        'name' => 'Foo',
+    ], [
+        'id' => 12,
+        'name' => 'Bar',
+    ], [
+        'id' => 1093,
+        'name' => 'Baz',
+    ],
+]))
+    ->reindexByColumn('id')
+    ->getElements()
+;
+
+\assert([
+    876 => [
+        'id' => 876,
+        'name' => 'Foo',
+    ],
+    12 => [
+        'id' => 12,
+        'name' => 'Bar',
+    ],
+    1093 => [
+        'id' => 1093,
+        'name' => 'Baz',
+    ],
+] === $output);
 ```

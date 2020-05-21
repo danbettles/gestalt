@@ -19,9 +19,12 @@ $order = [
     'quux',
 ];
 
-$result = (new ArrayObject($elements))->sortByKey($order);
+$result = (new ArrayObject($elements))
+    ->sortByKey($order)
+    ->getElements()
+;
 
-assert($result === [
+\assert($result === [
     'corge' => 'grault',
     'foo' => 'bar',
     'quux' => 'quuz',

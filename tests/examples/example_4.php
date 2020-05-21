@@ -17,6 +17,6 @@ $output = [];
     return false;
 });
 
-assert($output === [
+\assert($output === [
     'foo' => 'bar',
 ]);

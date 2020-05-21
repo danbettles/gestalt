@@ -23,5 +23,5 @@ $request = [];
 
 $returnValue = $chain->execute($request);
 
-assert($request === [1, 2]);
-assert($returnValue === false);
+\assert($request === [1, 2]);
+\assert($returnValue === false);

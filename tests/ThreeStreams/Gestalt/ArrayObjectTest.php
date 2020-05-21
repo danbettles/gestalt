@@ -6,6 +6,7 @@ namespace ThreeStreams\Gestalt\Tests;
 
 use PHPUnit\Framework\TestCase;
 use ThreeStreams\Gestalt\ArrayObject;
+use InvalidArgumentException;
 
 class ArrayObjectTest extends TestCase
 {
@@ -206,5 +207,150 @@ class ArrayObjectTest extends TestCase
             'baz' => 'qux',
             'quux' => 'quuz',
         ], $arrayObject->getElements());
+    }
+
+    public function providesReindexedArrays(): array
+    {
+        $fooArray = [
+            'id' => 123,
+            'name' => 'Foo',
+        ];
+
+        $barArray = [
+            'id' => 456,
+            'name' => 'Bar',
+        ];
+
+        $bazArray = [
+            'id' => 789,
+            'name' => 'Baz',
+        ];
+
+        $fooObject = (object) $fooArray;
+        $barObject = (object) $barArray;
+        $bazObject = (object) $bazArray;
+
+        return [[
+            //Only array records.
+            [
+                'Bar' => $barArray,
+                'Foo' => $fooArray,
+                'Baz' => $bazArray,
+            ],
+            [
+                $barArray,
+                $fooArray,
+                $bazArray,
+            ],
+            'name',
+        ], [
+            //Only object records.
+            [
+                'Bar' => $barObject,
+                'Foo' => $fooObject,
+                'Baz' => $bazObject,
+            ],
+            [
+                $barObject,
+                $fooObject,
+                $bazObject,
+            ],
+            'name',
+        ], [
+            //A mix of array and object records.
+            [
+                'Bar' => $barObject,
+                'Foo' => $fooArray,
+                'Baz' => $bazObject,
+            ],
+            [
+                $barObject,
+                $fooArray,
+                $bazObject,
+            ],
+            'name',
+        ]];
+    }
+
+    /**
+     * @dataProvider providesReindexedArrays
+     */
+    public function testReindexbycolumnvalueReindexesTheElementsByTheSpecifiedColumn(
+        array $expected,
+        array $input,
+        string $columnKey
+    ) {
+        $arrayObject = new ArrayObject($input);
+
+        $something = $arrayObject->reindexByColumn($columnKey);
+
+        $this->assertSame($arrayObject, $something);
+        $this->assertSame($expected, $something->getElements());
+    }
+
+    public function providesElementsThatAreNotAllRecords(): array
+    {
+        return [[
+            [
+                [
+                    'id' => 123,
+                    'name' => 'Foo',
+                ],
+                'Bar',  //Not a record ;-)
+            ],
+            'name',
+            1,
+        ]];
+    }
+
+    /**
+     * @dataProvider providesElementsThatAreNotAllRecords
+     */
+    public function testReindexbycolumnvalueThrowsAnExceptionIfAnElementIsNotARecord(
+        array $input,
+        string $columnKey,
+        $faultyElementKey
+    ) {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage("The element at index `{$faultyElementKey}` is not a record.");
+
+        (new ArrayObject($input))->reindexByColumn($columnKey);
+    }
+
+    public function providesRecordsMissingTheRequiredColumn(): array
+    {
+        return [[
+            [
+                [
+                    'id' => 123,
+                    'name' => 'Foo',
+                ],
+                [
+                    'id' => 456,
+                    'name' => 'Bar',
+                ],
+                [
+                    'id' => 789,
+                    'title' => 'Baz',
+                    //`name` element does not exist.
+                ],
+            ],
+            'name',
+            2,
+        ]];
+    }
+
+    /**
+     * @dataProvider providesRecordsMissingTheRequiredColumn
+     */
+    public function testReindexbycolumnvalueThrowsAnExceptionIfAnElementDoesNotContainTheRequiredColumn(
+        array $input,
+        string $columnKey,
+        $faultyElementKey
+    ) {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage("The record at index `{$faultyElementKey}` does not contain the field `{$columnKey}`.");
+
+        (new ArrayObject($input))->reindexByColumn($columnKey);
     }
 }

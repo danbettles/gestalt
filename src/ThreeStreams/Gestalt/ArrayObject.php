@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ThreeStreams\Gestalt;
 
 use Closure;
+use InvalidArgumentException;
 
 /**
  * A simple array class.  Instances are mutable (i.e. methods change the state of the object).
@@ -85,5 +86,33 @@ class ArrayObject
                 return;
             }
         }
+    }
+
+    /**
+     * Reindexes the elements, which must be array/object records, using the values in the column with the specified key.
+     *
+     * @throws InvalidArgumentException If an element is not a record.
+     * @throws InvalidArgumentException If a record does not contain a field with the specified name.
+     */
+    public function reindexByColumn(string $columnKey): self
+    {
+        $reindexed = [];
+
+        foreach ($this->getElements() as $key => $element) {
+            if (!\is_array($element) && !\is_object($element)) {
+                throw new InvalidArgumentException("The element at index `{$key}` is not a record.");
+            }
+
+            $normalizedRecord = (array) $element;
+
+            if (!\array_key_exists($columnKey, $normalizedRecord)) {
+                throw new InvalidArgumentException("The record at index `{$key}` does not contain the field `{$columnKey}`.");
+            }
+
+            $newKey = $normalizedRecord[$columnKey];
+            $reindexed[$newKey] = $element;
+        }
+
+        return $this->setElements($reindexed);
     }
 }

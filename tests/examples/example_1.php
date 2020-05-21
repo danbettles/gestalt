@@ -6,16 +6,17 @@ use ThreeStreams\Gestalt\ArrayObject;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
-$elements = [
+$result = (new ArrayObject([
     'foo' => 'bar',
     'baz' => 'qux',
     'quux' => 'quuz',
     'corge' => 'grault',
-];
+]))
+    ->sortByKey()
+    ->getElements()
+;
 
-$result = (new ArrayObject($elements))->sortByKey();
-
-assert($result === [
+\assert($result === [
     'baz' => 'qux',
     'corge' => 'grault',
     'foo' => 'bar',
