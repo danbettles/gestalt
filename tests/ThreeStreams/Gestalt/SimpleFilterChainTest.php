@@ -11,6 +11,9 @@ use stdClass;
 
 class SimpleFilterChainTest extends TestCase
 {
+    /** @var string Because PHP 7 and 8 use different wording for the exception message */
+    private const REGEX_MUST_BE_CALLABLE = '~( must be callable,| must be of type callable,)~';
+
     /**
      * Creates an array containing all the types of `callable` -- see
      * https://www.php.net/manual/en/language.types.callable.php
@@ -99,7 +102,7 @@ class SimpleFilterChainTest extends TestCase
     public function testConstructorThrowsAnExceptionIfAFilterIsNotACallable($invalidFilter)
     {
         $this->expectException(TypeError::class);
-        $this->expectExceptionMessageMatches('~ must be callable,~');
+        $this->expectExceptionMessageMatches(self::REGEX_MUST_BE_CALLABLE);
 
         new SimpleFilterChain([$invalidFilter]);
     }
@@ -150,7 +153,7 @@ class SimpleFilterChainTest extends TestCase
     public function testAppendfilterThrowsAnExceptionIfTheFilterIsNotACallable($invalidFilter)
     {
         $this->expectException(TypeError::class);
-        $this->expectExceptionMessageMatches('~ must be callable,~');
+        $this->expectExceptionMessageMatches(self::REGEX_MUST_BE_CALLABLE);
 
         (new SimpleFilterChain())->appendFilter($invalidFilter);
     }
