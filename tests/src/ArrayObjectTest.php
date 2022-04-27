@@ -2,11 +2,13 @@
 
 declare(strict_types=1);
 
-namespace ThreeStreams\Gestalt\Tests;
+namespace DanBettles\Gestalt\Tests;
 
 use PHPUnit\Framework\TestCase;
-use ThreeStreams\Gestalt\ArrayObject;
+use DanBettles\Gestalt\ArrayObject;
 use InvalidArgumentException;
+
+use const false;
 
 class ArrayObjectTest extends TestCase
 {

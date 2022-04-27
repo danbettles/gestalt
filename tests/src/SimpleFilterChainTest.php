@@ -2,12 +2,19 @@
 
 declare(strict_types=1);
 
-namespace ThreeStreams\Gestalt\Tests;
+namespace DanBettles\Gestalt\Tests;
 
 use PHPUnit\Framework\TestCase;
-use ThreeStreams\Gestalt\SimpleFilterChain;
+use DanBettles\Gestalt\SimpleFilterChain;
 use TypeError;
 use stdClass;
+
+use function array_map;
+use function reset;
+
+use const false;
+use const null;
+use const true;
 
 class SimpleFilterChainTest extends TestCase
 {

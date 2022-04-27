@@ -2,10 +2,20 @@
 
 declare(strict_types=1);
 
-namespace ThreeStreams\Gestalt;
+namespace DanBettles\Gestalt;
 
 use Closure;
 use InvalidArgumentException;
+
+use function array_flip;
+use function array_intersect_key;
+use function array_key_exists;
+use function array_replace;
+use function is_array;
+use function is_object;
+use function ksort;
+
+use const false;
 
 /**
  * A simple array class.  Instances are mutable (i.e. methods change the state of the object).
@@ -55,7 +65,7 @@ class ArrayObject
     }
 
     /**
-     * When no arguments are passed, behaves the same as [\ksort()](https://www.php.net/manual/en/function.ksort.php).
+     * When no arguments are passed, behaves the same as [ksort()](https://www.php.net/manual/en/function.ksort.php).
      * Otherwise, the elements can be put in the order specified in `$order`; this applies to arrays with numeric or
      * non-numeric keys.
      */
@@ -63,14 +73,14 @@ class ArrayObject
     {
         if (empty($order)) {
             $sorted = $this->getElements();
-            \ksort($sorted);
+            ksort($sorted);
 
             return $this->setElements($sorted);
         }
 
         $elements = $this->getElements();
-        $base = \array_intersect_key(\array_flip($order), $elements);
-        $sorted = \array_replace($base, $elements);
+        $base = array_intersect_key(array_flip($order), $elements);
+        $sorted = array_replace($base, $elements);
 
         return $this->setElements($sorted);
     }
@@ -99,13 +109,13 @@ class ArrayObject
         $reindexed = [];
 
         foreach ($this->getElements() as $key => $element) {
-            if (!\is_array($element) && !\is_object($element)) {
+            if (!is_array($element) && !is_object($element)) {
                 throw new InvalidArgumentException("The element at index `{$key}` is not a record.");
             }
 
             $normalizedRecord = (array) $element;
 
-            if (!\array_key_exists($columnKey, $normalizedRecord)) {
+            if (!array_key_exists($columnKey, $normalizedRecord)) {
                 throw new InvalidArgumentException("The record at index `{$key}` does not contain the field `{$columnKey}`.");
             }
 

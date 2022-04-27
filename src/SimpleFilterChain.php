@@ -2,7 +2,10 @@
 
 declare(strict_types=1);
 
-namespace ThreeStreams\Gestalt;
+namespace DanBettles\Gestalt;
+
+use const false;
+use const null;
 
 /**
  * A simple unidirectional filter chain.

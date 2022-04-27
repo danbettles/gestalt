@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ThreeStreams\Gestalt\Tests;
+namespace DanBettles\Gestalt\Tests;
 
 class TestCallables
 {

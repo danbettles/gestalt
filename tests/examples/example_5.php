@@ -1,8 +1,8 @@
 <?php
 
-namespace ThreeStreams\Gestalt\Tests;
+namespace DanBettles\Gestalt\Tests;
 
-use ThreeStreams\Gestalt\SimpleFilterChain;
+use DanBettles\Gestalt\SimpleFilterChain;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 

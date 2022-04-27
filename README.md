@@ -1,6 +1,6 @@
 # Gestalt
 
-[![Build Status](https://travis-ci.com/threestreams/gestalt.svg?branch=master)](https://travis-ci.com/threestreams/gestalt)
+[![Build Status](https://travis-ci.com/danbettles/gestalt.svg?branch=master)](https://travis-ci.com/danbettles/gestalt)
 
 Provides classes that implement basic patterns involving collections.  Key components are a class implementing a simplified filter-chain pattern, `SimpleFilterChain`, and a simple array class, `ArrayObject`.
 
@@ -15,7 +15,7 @@ Invokes each filter in turn; the specified 'request' will be passed to each filt
 Iteration will stop if a filter returns the value of `$valueToBreak`.  If iteration is forcibly stopped then the method will return the value of `$valueToBreak`.  If, however, iteration is allowed to continue until completion then the method will return `null`.
 
 ```php
-use ThreeStreams\Gestalt\SimpleFilterChain;
+use DanBettles\Gestalt\SimpleFilterChain;
 
 $chain = (new SimpleFilterChain([
     function (&$request) {
@@ -47,7 +47,7 @@ A simple array class.  Instances are mutable (i.e. methods change the state of t
 When no arguments are passed, behaves the same as [ksort()](https://www.php.net/manual/en/function.ksort.php).
 
 ```php
-use ThreeStreams\Gestalt\ArrayObject;
+use DanBettles\Gestalt\ArrayObject;
 
 $result = (new ArrayObject([
     'foo' => 'bar',
@@ -70,7 +70,7 @@ $result = (new ArrayObject([
 Otherwise, the elements can be put in the order specified in `$order`; this applies to arrays with numeric or non-numeric keys.
 
 ```php
-use ThreeStreams\Gestalt\ArrayObject;
+use DanBettles\Gestalt\ArrayObject;
 
 $elements = [
     'foo' => 'bar',
@@ -103,7 +103,7 @@ $result = (new ArrayObject($elements))
 Executes the callback for each of the elements.  The callback is passed the key and the value of the current element, in that order.
 
 ```php
-use ThreeStreams\Gestalt\ArrayObject;
+use DanBettles\Gestalt\ArrayObject;
 
 $elements = [
     'foo' => 'bar',
@@ -123,7 +123,7 @@ $arrayObject = (new ArrayObject($elements))->each(function ($key, $value) use (&
 `each()` will stop iterating if the callback returns exactly `false`.
 
 ```php
-use ThreeStreams\Gestalt\ArrayObject;
+use DanBettles\Gestalt\ArrayObject;
 
 $output = [];
 
@@ -146,7 +146,7 @@ $output = [];
 Useful when working with collections of records (arrays/objects) of the same type.  Could be used to reindex an array of records selected from a database, by the values from a particular column, for example.
 
 ```php
-use ThreeStreams\Gestalt\ArrayObject;
+use DanBettles\Gestalt\ArrayObject;
 
 $output = (new ArrayObject([
     [

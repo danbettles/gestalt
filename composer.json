@@ -1,5 +1,5 @@
 {
-    "name": "threestreams/gestalt",
+    "name": "danbettles/gestalt",
     "description": "Provides classes that implement basic patterns involving collections.  Key components are a class implementing a simplified filter-chain pattern, `SimpleFilterChain`, and a simple array class, `ArrayObject`.",
     "type": "library",
     "license": "ISC",
@@ -18,10 +18,10 @@
         "danbettles/codesniffer-standard": "^v2.0.0"
     },
     "autoload": {
-        "psr-4": {"ThreeStreams\\Gestalt\\": "src/ThreeStreams/Gestalt/"}
+        "psr-4": {"DanBettles\\Gestalt\\": "src/"}
     },
     "autoload-dev": {
-        "psr-4": {"ThreeStreams\\Gestalt\\Tests\\": "tests/ThreeStreams/Gestalt/"}
+        "psr-4": {"DanBettles\\Gestalt\\Tests\\": "tests/src/"}
     },
     "scripts": {
         "app:check-quality": [

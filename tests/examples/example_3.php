@@ -1,8 +1,8 @@
 <?php
 
-namespace ThreeStreams\Gestalt\Tests;
+namespace DanBettles\Gestalt\Tests;
 
-use ThreeStreams\Gestalt\ArrayObject;
+use DanBettles\Gestalt\ArrayObject;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
