@@ -1,0 +1,16 @@
+build:
+  nodes:
+    php81:
+      environment:
+        php:
+          version: 8.1
+          ini:
+              'xdebug.mode': 'coverage'
+      tests:
+        override:
+          - phpcs-run
+          - php-scrutinizer-run
+          - command: composer app:test
+            coverage:
+              file: clover.xml
+              format: clover

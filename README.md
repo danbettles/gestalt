@@ -1,6 +1,6 @@
 # Gestalt
 
-[![Build Status](https://travis-ci.com/danbettles/gestalt.svg?branch=master)](https://travis-ci.com/danbettles/gestalt)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/danbettles/gestalt/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/danbettles/gestalt/?branch=main) [![Code Coverage](https://scrutinizer-ci.com/g/danbettles/gestalt/badges/coverage.png?b=main)](https://scrutinizer-ci.com/g/danbettles/gestalt/?branch=main) [![Build Status](https://scrutinizer-ci.com/g/danbettles/gestalt/badges/build.png?b=main)](https://scrutinizer-ci.com/g/danbettles/gestalt/build-status/main)
 
 Provides classes that implement basic patterns involving collections.  Key components are a class implementing a simplified filter-chain pattern, `SimpleFilterChain`, and a simple array class, `ArrayObject`.
 

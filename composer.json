@@ -24,9 +24,11 @@
         "psr-4": {"DanBettles\\Gestalt\\Tests\\": "tests/src/"}
     },
     "scripts": {
+        "app:test": "phpunit",
+        "app:lint": "phpcs --standard=phpcs.xml",
         "app:check-quality": [
-            "phpunit",
-            "phpcs --standard=phpcs.xml"
+            "@app:test",
+            "@app:lint"
         ]
     }
 }
