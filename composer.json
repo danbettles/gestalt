@@ -26,7 +26,7 @@
     "scripts": {
         "app:check-quality": [
             "phpunit --bootstrap vendor/autoload.php --colors=always tests",
-            "phpcs --standard=phpcs.xml -p --colors"
+            "phpcs --standard=phpcs.xml"
         ]
     },
     "config": {

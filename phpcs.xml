@@ -3,6 +3,8 @@
     <config name="ignore_warnings_on_exit" value="1"/>
 
     <arg name="extensions" value="php"/>
+    <arg value="p"/>
+    <arg name="colors"/>
 
     <file>src</file>
     <file>tests</file>
