@@ -1,5 +1,7 @@
 # Gestalt
 
+[![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://stand-with-ukraine.pp.ua)
+
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/danbettles/gestalt/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/danbettles/gestalt/?branch=main) [![Code Coverage](https://scrutinizer-ci.com/g/danbettles/gestalt/badges/coverage.png?b=main)](https://scrutinizer-ci.com/g/danbettles/gestalt/?branch=main) [![Build Status](https://scrutinizer-ci.com/g/danbettles/gestalt/badges/build.png?b=main)](https://scrutinizer-ci.com/g/danbettles/gestalt/build-status/main)
 
 Provides classes that implement basic patterns involving collections.  Key components are a class implementing a simplified filter-chain pattern, `SimpleFilterChain`, and a simple array class, `ArrayObject`.
